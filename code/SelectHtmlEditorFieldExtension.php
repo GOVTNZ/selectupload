@@ -7,14 +7,14 @@ class SelectHtmlEditorFieldExtension extends Extension {
 	 *
 	 * @param int $parentID
 	 */
-	public function updateAttachParentID(&$parentID) {
+	/*public function updateAttachParentID(&$parentID) {
 		// If given assume that a folder has been posted
 		if($parentID) {
 			FolderDropdownField::set_last_folder($parentID);
 		} else {
 			$parentID = FolderDropdownField::get_last_folder();
 		}
-	}
+	}*/
 
 	/**
 	 * Substitute the SelectUploadField in place of the UploadField

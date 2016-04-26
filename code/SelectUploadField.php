@@ -49,7 +49,7 @@ class SelectUploadField extends UploadField {
 	 */
 	protected $selectField;
 
-	public function __construct($name, $title = null, $defaultFolder = null, \SS_List $items = null) {
+	public function __construct($name, $title = null, \SS_List $items = null, $defaultFolder = null) {
 		parent::__construct($name, $title, $items);
 
 		$this->addExtraClass('ss-selectupload'); // class, used by js

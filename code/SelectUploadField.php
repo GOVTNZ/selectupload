@@ -49,18 +49,22 @@ class SelectUploadField extends UploadField {
 	 */
 	protected $selectField;
 
-	public function __construct($name, $title = null, \SS_List $items = null) {
+	public function __construct($name, $title = null, $defaultFolder = null, \SS_List $items = null) {
 		parent::__construct($name, $title, $items);
 
 		$this->addExtraClass('ss-selectupload'); // class, used by js
-		$this->addExtraClass('ss-selectuploadfield'); // class, used by css for selectuploadfield onl
+		$this->addExtraClass('ss-selectuploadfield'); // class, used by css for selectuploadfield only
 
 		$this->selectField = FolderDropdownField::create("{$name}/folder")
 			->addExtraClass('FolderSelector')
 			->setTitle('Select a folder to upload into');
 
-		// If we haven't uploaded to a folder yet, set to the default foldername
-		if(!$this->selectField->Value()) {
+		// If we have a default set, use it
+		if ($defaultFolder) {
+			$folderID = $this->folderIDFromPath($defaultFolder);
+			if($folderID) $this->selectField->setValue($folderID);
+		} elseif (!$this->selectField->Value()) {
+			// otherwise set to the default foldername
 			$folderID = $this->folderIDFromPath($this->getDefaultFolderName());
 			if($folderID) $this->selectField->setValue($folderID);
 		}
